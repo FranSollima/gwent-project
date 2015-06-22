@@ -1,0 +1,119 @@
+-- Table: "Cards"
+
+-- DROP TABLE "Cards";
+
+CREATE TABLE "Cards"
+(
+  id integer NOT NULL,
+  name character varying,
+  description character varying,
+  type character varying,
+  faction character varying,
+  atk integer,
+  effect_id integer,
+  CONSTRAINT "Cards_pkey" PRIMARY KEY (id),
+  CONSTRAINT "Cards_effect_id_fkey" FOREIGN KEY (effect_id)
+      REFERENCES "Effects" (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Cards"
+  OWNER TO pgfran;
+
+-- Table: "Decks"
+
+-- DROP TABLE "Decks";
+
+CREATE TABLE "Decks"
+(
+  id integer NOT NULL,
+  card_list integer[],
+  user_id integer,
+  CONSTRAINT "Decks_pkey" PRIMARY KEY (id),
+  CONSTRAINT "Decks_user_fkey" FOREIGN KEY (user_id)
+      REFERENCES "Users" (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Decks"
+  OWNER TO pgfran;
+
+-- Table: "Effects"
+
+-- DROP TABLE "Effects";
+
+CREATE TABLE "Effects"
+(
+  id integer NOT NULL,
+  type character varying NOT NULL,
+  CONSTRAINT "Effects_pkey" PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Effects"
+  OWNER TO pgfran;
+
+-- Table: "SessionManager"
+
+-- DROP TABLE "SessionManager";
+
+CREATE TABLE "SessionManager"
+(
+  id character varying NOT NULL,
+  player1_id integer,
+  player1_deck_id integer,
+  player1_long integer[],
+  player1_mid integer[],
+  player1_short integer[],
+  player1_round1 integer,
+  player1_round2 integer,
+  player1_round3 integer,
+  player2_id integer,
+  player2_deck_id integer,
+  player2_long integer[],
+  player2_mid integer[],
+  player2_short integer[],
+  player2_round1 integer,
+  player2_round2 integer,
+  player2_round3 integer,
+  CONSTRAINT "SessionManager_pkey" PRIMARY KEY (id),
+  CONSTRAINT "SessionManager_player1_deck_id_fkey" FOREIGN KEY (player1_deck_id)
+      REFERENCES "Decks" (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT "SessionManager_player1_id_fkey" FOREIGN KEY (player1_id)
+      REFERENCES "Users" (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT "SessionManager_player2_deck_id_fkey" FOREIGN KEY (player2_deck_id)
+      REFERENCES "Decks" (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT "SessionManager_player2_id_fkey" FOREIGN KEY (player2_id)
+      REFERENCES "Users" (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "SessionManager"
+  OWNER TO pgfran;
+
+-- Table: "Users"
+
+-- DROP TABLE "Users";
+
+CREATE TABLE "Users"
+(
+  id integer NOT NULL,
+  username character varying,
+  password character varying,
+  CONSTRAINT "Users_pkey" PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Users"
+  OWNER TO pgfran;
