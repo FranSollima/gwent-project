@@ -31,6 +31,7 @@ CREATE TABLE "Decks"
   id integer NOT NULL,
   card_list integer[],
   user_id integer,
+  faction varchar,
   CONSTRAINT "Decks_pkey" PRIMARY KEY (id),
   CONSTRAINT "Decks_user_fkey" FOREIGN KEY (user_id)
       REFERENCES "Users" (id) MATCH SIMPLE
