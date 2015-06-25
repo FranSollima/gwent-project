@@ -41,22 +41,22 @@ class Factions(models.Model):
 
 class SessionManager(models.Model):
 	id = models.AutoField(primary_key=True)
-	player1_id = models.ForeignKey('Users', to_field='id', db_column='player1_id')
-	player1_deck_id = models.ForeignKey('Decks', to_field='id', db_column='player1_deck_id')
+	player1_id = models.IntegerField(null=False, blank=False)
+	player1_deck_id = models.IntegerField(null=False, blank=False)
 	player1_siege = models.CommaSeparatedIntegerField(max_length=100)
 	player1_range = models.CommaSeparatedIntegerField(max_length=100)
 	player1_infantry = models.CommaSeparatedIntegerField(max_length=100)
-	player1_round1 = models.IntegerField(null=False, blank=False)
-	player1_round2 = models.IntegerField(null=False, blank=False)
-	player1_round3 = models.IntegerField(null=False, blank=False)
-	player2_id = models.ForeignKey('Users', to_field='id', db_column='player2_id')
-	player2_deck_id = models.ForeignKey('Decks', to_field='id', db_column='player2_deck_id')
+	player1_round1 = models.IntegerField(null=True, blank=True)
+	player1_round2 = models.IntegerField(null=True, blank=True)
+	player1_round3 = models.IntegerField(null=True, blank=True)
+	player2_id = models.IntegerField(null=False, blank=False)
+	player2_deck_id = models.IntegerField(null=False, blank=False)
 	player2_siege = models.CommaSeparatedIntegerField(max_length=100)
 	player2_range = models.CommaSeparatedIntegerField(max_length=100)
 	player2_infantry = models.CommaSeparatedIntegerField(max_length=100)
-	player2_round1 = models.IntegerField(null=False, blank=False)
-	player2_round2 = models.IntegerField(null=False, blank=False)
-	player2_round3 = models.IntegerField(null=False, blank=False)
+	player2_round1 = models.IntegerField(null=True, blank=True)
+	player2_round2 = models.IntegerField(null=True, blank=True)
+	player2_round3 = models.IntegerField(null=True, blank=True)
 	class Meta:
 		db_table = u'SessionManager'
 
