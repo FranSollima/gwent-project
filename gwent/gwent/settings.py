@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from configConnection import ConfigConnection
+
+db = ConfigConnection()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -78,11 +81,11 @@ WSGI_APPLICATION = 'gwent.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'gwent',                      # Or path to database file if using sqlite3.
-        'USER': 'francisco',                      # Not used with sqlite3.
-        'PASSWORD': 'francisco',                  # Not used with sqlite3.
-        'HOST': 'm2Fran',                    # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': db.name,                         # Or path to database file if using sqlite3.
+        'USER': db.user,                         # Not used with sqlite3.
+        'PASSWORD': db.password,                 # Not used with sqlite3.
+        'HOST': db.server,                       # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': db.port,                         # Set to empty string for default. Not used with sqlite3.
     }
 }
 
