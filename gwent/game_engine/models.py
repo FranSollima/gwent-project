@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Cards(models.Model):
@@ -17,7 +18,7 @@ class Decks(models.Model):
 	name = models.CharField(max_length=100)
 	faction_id = models.ForeignKey('Factions', to_field='id', db_column='faction_id')
 	card_list = models.CommaSeparatedIntegerField(max_length=100)
-	user_id = models.ForeignKey('Users', to_field='id', db_column='user_id')
+	user_id = models.ForeignKey(User)
 	class Meta:
 		db_table = u'Decks'
 	def __unicode__(self):
@@ -59,12 +60,3 @@ class SessionManager(models.Model):
 	player2_round3 = models.IntegerField(null=True, blank=True)
 	class Meta:
 		db_table = u'SessionManager'
-
-class Users(models.Model):
-	id = models.AutoField(primary_key=True)
-	username = models.CharField(max_length=100)
-	password = models.CharField(max_length=100)
-	class Meta:
-		db_table = u'Users'
-	def __unicode__(self):
-		return self.username

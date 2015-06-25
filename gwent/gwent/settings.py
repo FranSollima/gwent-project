@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game_engine',
+    'gwent_web',
 )
 
 MIDDLEWARE_CLASSES = (

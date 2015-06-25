@@ -1,3 +1,4 @@
 *.pyc
 *.DS_Store
 gwent/configConnection.py
+gwent/game_engine/migrations/*
