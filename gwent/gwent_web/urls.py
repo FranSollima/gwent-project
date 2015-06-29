@@ -4,6 +4,6 @@ from .views import *
 
 urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
-    url('^accounts/', include('registration.urls')),
+    url(r'^$', LoginView.as_view(), name='Login'),
+    url(r'^logout/$', LogoutView.as_view()),
 ]

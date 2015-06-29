@@ -1,0 +1,17 @@
+<div>
+	{% if not user.is_authenticated %}
+			<form id='loginForm' method="post" action="/">
+				{% csrf_token %}
+				{{ form.as_p}}
+				<input type="submit">
+			</form>
+			<div id="mensaje_usuario">
+				<p>{{ request.session.mensaje_error }}</p>
+			</div>
+	{% else %}
+		<div id="mensaje_usuario">
+			<p>Bienvenid@, {{ request.user.username }}</p>
+		</div>
+		<a href="/logout">Cerrar sesión</a>
+	{% endif %}
+</div>
