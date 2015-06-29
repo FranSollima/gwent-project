@@ -22,7 +22,7 @@ class LoginView(FormView):
 				login(self.request, user)
 				if url != '':
 					return redirect(url)
-				return redirect('/admin/login/')
+				return redirect('panel')
 			else:
 				request.session['mensaje_error'] = 'Usuario y/o password incorrectos'
 				return redirect('/')
