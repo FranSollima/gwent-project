@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html ng-app>
-	<head>
-		{% block head %} {% endblock head %}
-		<title>{% block title %}Index of Gwent{% endblock title %}</title>
+{% extends 'base.html' %}
 
-		{% block js %}	{% endblock js %}
-	</head>
-	<body id="body">
+{% block title %}Index of Gwent{% endblock title %}
+
+{% block body %}
 		Welcome to the unofficial Gwent Project!
 		<br>
 		Go ahead and login:</a>
 		<div class="login">
-			{% include 'login.html'%}
+			{% include 'parts/login.html'%}
 		</div>
-	</body>
-</html>
+{% endblock body %}
