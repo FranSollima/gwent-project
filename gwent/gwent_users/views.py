@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from ..marketimetricsWeb.mixins import LoginRequiredMixin
+from gwent_web.mixins import LoginRequiredMixin
 
 # Create your views here.
 class PanelView(LoginRequiredMixin, TemplateView):

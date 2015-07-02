@@ -8,6 +8,7 @@
 			<div id="mensaje_usuario">
 				<p>{{ request.session.mensaje_error }}</p>
 			</div>
+			No account? <a href="/register">Register</a>
 	{% else %}
 		<div id="mensaje_usuario">
 			<p>Bienvenid@, {{ request.user.username }}</p>

@@ -1,6 +1,6 @@
 from django.views.generic import RedirectView, FormView
 from forms import LoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -22,20 +22,16 @@ class LoginView(FormView):
 				login(self.request, user)
 				if url != '':
 					return redirect(url)
-				return redirect('panel')
-			else:
-				request.session['mensaje_error'] = 'Usuario y/o password incorrectos'
-				return redirect('/')
-		else:
+				return redirect('/panel')
+			self.request.session['mensaje_error'] = 'Usuario inactivo'
 			return redirect('/')
+		self.request.session['mensaje_error'] = 'Usuario y/o password incorrectos'
+		return redirect('/')
+
 
 class LogoutView(RedirectView):
 	url='/'
 
 	def get(self, request, *args, **kwargs):
-		self.request.session['usuario_autenticado'] = False
-		self.request.session['id'] = -1
-		self.request.session['usuario'] = 'No autenticado'
-		self.request.session['usuario_descripcion'] = 'No autenticado'
-		return super(LogoutUsers, self).get(request, *args, **kwargs)
-
+		logout(request)
+		return redirect(self.url)
